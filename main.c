@@ -2,13 +2,10 @@
 #include <stdlib.h>
 #include<string.h>
 #include<windows.h>
-
-
-
 #define d "finalisee"
 #define td "realiser"
 #define doo "a realiser"
-FILE *file;
+
 typedef struct{
       int jour;
       int heurs;
@@ -127,7 +124,7 @@ Afficher_les_tache(){
     fclose(file);
 }
   rewind(file);
-    printf("\n=======================================================================================                                                   Afficher les tache\n=======================================================================================\n");
+    printf("\n=======================================================================================\n                                                   Afficher les tache\n=======================================================================================\n");
     printf("\n_______________________________________________________________________________________________________________________\n");
     printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
     printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
@@ -137,13 +134,84 @@ Afficher_les_tache(){
 
     }
 
-
+    fclose(file);
         int o;
         printf("\n1-go to menu principal:");scanf("%d",&o);
         if(o==1)menuPrincipal();else return 0;
 }
-Modifier_une_tache(){}
-Supprimer_identifiant(){}
+Modifier_une_tache(){
+   FILE *file = fopen("taches.txt", "r");
+   FILE *temp = fopen("temp.txt", "w");
+           Taches tacheA;
+           if (file == NULL) {
+    printf( "\nil ya une erreur !");
+    fclose(file);
+}
+     rewind(file);
+
+      int n;
+           printf("=======================================================================================                                                   Modifier une tache:\n=======================================================================================\n");
+           printf("\nentree le code de tache tu veux te modifie:");scanf("%d",&n);
+        while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
+                if (tacheA.codeId==n){
+          printf("entrer nouvelle le titre de tache:");scanf(" %[^\n]", &tacheA.titre);
+          printf("entrer nouvelle le description de tache:");scanf(" %[^\n]", &tacheA.description);
+          printf("entrer nouvelle deadline de tache  ce formme => jj/hh/mm :");scanf("%d/%d/%d",&tacheA.date.jour,&tacheA.date.heurs,&tacheA.date.minute);
+          int m;
+          printf("1=>realiser\n2=>a realiser\n3=>finalisee");
+          printf("\nchoisir une nouvelle statue:");scanf("%d",&m);
+          switch(m){
+             case 1 :strcpy(tacheA.statut,td);break;
+             case 2 :strcpy(tacheA.statut,d);break;
+             case 3 :strcpy(tacheA.statut,doo);break;
+          }
+                }
+           fprintf(temp, "%d\n%s\n%s\n%d\n%d\n%d\n%s\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
+
+        }
+        fclose(file);
+        fclose(temp);
+        remove("taches.txt");
+        rename("temp.txt","taches.txt");
+
+
+          int o;
+        printf("\n1-go to menu principal:");scanf("%d",&o);
+        if(o==1)menuPrincipal();else return 0;
+}
+Supprimer_identifiant(){
+    FILE *file = fopen("taches.txt", "r");
+    FILE *temp = fopen("temp.txt", "w");
+           Taches tacheA;
+           if (file==NULL) {
+    printf("\nil ya une erreur !");
+    fclose(file);
+  }
+    if (temp==NULL) {
+    printf("\nil ya une erreur !");
+    fclose(temp);
+  }
+     rewind(file);
+      int n,a=0;
+           printf("=======================================================================================                                                   Modifier une tache:\n=======================================================================================\n");
+           printf("\nentree le code de tache tu veux te spprimer:");scanf("%d",&n);
+        while (!feof(file)) {
+                fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut);
+                if (n!=tacheA.codeId){
+            fprintf(temp, "%d\n%s\n%s\n%d\n%d\n%d\n%s\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
+        }
+        else continue;
+        }
+
+        fclose(file);
+        fclose(temp);
+        remove("taches.txt");
+        rename("temp.txt","taches.txt");
+
+         int o;
+        printf("\n1-go to menu principal:");scanf("%d",&o);
+        if(o==1)menuPrincipal();else return ;
+    }
 Rechercher_Taches(){}
 Statistiques(){}
 int main()

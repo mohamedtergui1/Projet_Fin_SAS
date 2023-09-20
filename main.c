@@ -143,7 +143,7 @@ Afficher_les_tache(){
         printf("\nentree votre choi :");scanf("%d",&o);
         if(o==1)trier_alpha();
         if(o==2)trier_deadline();
-        if(o==3)jour_deadline();
+        if(o==3)jour_deadline_3jour();
         if(o==4)menuPrincipal();
         else return ;
 }
@@ -268,9 +268,17 @@ void trier_alpha(){
     }
     free(tacheA);
    fclose(file);
-      int o;
-        printf("\n1-go to menu principal:");scanf("%d",&o);
-        if(o==1)menuPrincipal();else return ;
+       int o;
+        printf("\n1-Trier les tâches par ordre alphabetique");
+        printf("\n2-Trier les tâches par deadline");
+        printf("\n3-Afficher les tâches dont le deadline est dans 3 jours ou moins");
+        printf("\naller au menu principal");
+        printf("\nentree votre choi :");scanf("%d",&o);
+        if(o==1)trier_alpha();
+        if(o==2)trier_deadline();
+        if(o==3)jour_deadline_3jour();
+        if(o==4)menuPrincipal();
+        else return ;
 }
 
 
@@ -296,17 +304,22 @@ trier_deadline(){    system("cls");
                                 tacheA[i]=tacheA[j];
                                 tacheA[j]=tmptache;
                              }
-              else if (tacheA[n].date.heurs<tacheA[j].date.heurs&&tacheA[n].date.jour==tacheA[j].date.jour)   {
+              else if (tacheA[n].date.jour==tacheA[j].date.jour){
+                    if (tacheA[n].date.heurs<tacheA[j].date.heurs){
                                 tmptache=tacheA[i];
                                 tacheA[i]=tacheA[j];
                                 tacheA[j]=tmptache;
-              }
-              else if (tacheA[n].date.minute<tacheA[j].date.minute&&tacheA[n].date.heurs==tacheA[j].date.heurs&&tacheA[n].date.jour==tacheA[j].date.jour){
+                    }
+                    else if (tacheA[n].date.heurs==tacheA[j].date.heurs){
+                    if (tacheA[n].date.minute<tacheA[j].date.minute){
                                 tmptache=tacheA[i];
                                 tacheA[i]=tacheA[j];
                                 tacheA[j]=tmptache;
+                    }
               }
-        }
+              }
+
+            }
     }
 
 
@@ -321,11 +334,51 @@ trier_deadline(){    system("cls");
     }
     free(tacheA);
    fclose(file);
-      int o;
-        printf("\n1-go to menu principal:");scanf("%d",&o);
-        if(o==1)menuPrincipal();else return ;}
+       int o;
+        printf("\n1-Trier les tâches par ordre alphabetique");
+        printf("\n2-Trier les tâches par deadline");
+        printf("\n3-Afficher les tâches dont le deadline est dans 3 jours ou moins");
+        printf("\naller au menu principal");
+        printf("\nentree votre choi :");scanf("%d",&o);
+        if(o==1)trier_alpha();
+        if(o==2)trier_deadline();
+        if(o==3)jour_deadline_3jour();
+        if(o==4)menuPrincipal();
+        else return ;
+        }
 
-jour_deadline(){}
+jour_deadline_3jour(){
+          FILE *file = fopen("taches.txt", "r");
+           Taches tacheA;
+           if (file == NULL) {
+    printf(file, "\nil ya une erreur !");
+    fclose(file);
+}
+  rewind(file);
+    printf("\n=======================================================================================\n                                                   Afficher les tache\n=======================================================================================\n");
+    printf("\n_______________________________________________________________________________________________________________________\n");
+    printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
+    printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
+     while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
+        if(tacheA.date.jour<=3){
+        printf("|%2d|%-20s|%-71s|%02d-%02d-%02d |%-11s|\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
+        printf("|__|____________________|_______________________________________________________________________|_________|___________|\n");
+        }
+    }
+
+    fclose(file);
+        int o;
+        printf("\n1-Trier les tâches par ordre alphabetique");
+        printf("\n2-Trier les tâches par deadline");
+        printf("\n3-Afficher les tâches dont le deadline est dans 3 jours ou moins");
+        printf("\naller au menu principal");
+        printf("\nentree votre choi :");scanf("%d",&o);
+        if(o==1)trier_alpha();
+        if(o==2)trier_deadline();
+        if(o==3)jour_deadline_3jour();
+        if(o==4)menuPrincipal();
+        else return ;
+}
 
 int main()
 {

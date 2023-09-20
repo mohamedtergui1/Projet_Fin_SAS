@@ -50,7 +50,7 @@ void sMenu(int n){
            case 6 : Rechercher_Taches();break;
            case 7 : Statistiques();break;
            case 8 : return 0;break;
-           default : printf("\ntu ai entrée un movie choi!!!");return 0;
+           default : printf("\ntu ai entrÃ©e un movie choi!!!");return 0;
 
          }
 }
@@ -129,10 +129,10 @@ Afficher_les_tache(){
   rewind(file);
     printf("\n=======================================================================================                                                   Afficher les tache\n=======================================================================================\n");
     printf("\n_____________________________________________________________________________________________________________________\n");
-    printf("|ID|           titre    |                   discription                                        | deadline  |   status  |");
-    printf("\n_____________________________________________________________________________________________________________________\n");
+    printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
+    printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
      while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
-        printf("|%2d|%-20s|%-50s|%2d-%2d-%2d|%-14s|\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
+        printf("|%2d|%-20s|%-71s|%02d-%02d-%02d |%-11s|\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
     }
 
 

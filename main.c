@@ -232,9 +232,9 @@ rewind(file);
 
    printf("\nentree le =>titer de tache  au le =>codeId de tache:"); scanf("%s",tmp);
 
+int p =strlen(tmp);
 
-
-   if( atoi(tmp)!=NULL){
+   if( atoi(tmp)!=NULL&&p<3){
 
     printf("\n=======================================================================================\n                                                   Afficher les tache\n=======================================================================================\n");
     printf("\n_______________________________________________________________________________________________________________________\n");
@@ -253,7 +253,7 @@ rewind(file);
     printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
     printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
      while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
-            if(strcmp(tmp,tacheA.titre)==0){
+            if(strncmp(tmp,tacheA.titre,p)==0){
         printf("|%2d|%-20s|%-71s|%02d-%02d-%02d |%-11s|\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
         printf("|__|____________________|_______________________________________________________________________|_________|___________|\n");
     }

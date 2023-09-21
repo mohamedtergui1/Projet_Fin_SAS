@@ -18,6 +18,22 @@ typedef struct{
      char description[1000];
      char statut[13];
 }Taches;
+int fonction_de_vExisstence(int id){
+    FILE *file = fopen("taches.txt", "r");
+           Taches tacheA;
+           if (file == NULL) {
+    printf( "\nil ya une erreur !");
+    fclose(file);
+}
+rewind(file);
+    int x=0;
+  while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
+            if(tacheA.codeId==id)
+             x++;
+     }
+     fclose(file);
+    return(x=0) ? 0:1;
+}
 void menuPrincipal(){
     system("cls");
       printf("=======================================================================================                                                   Menu Principal\n=======================================================================================");
@@ -60,6 +76,9 @@ Ajouter_une_tache(){
 }
           printf("\n=======================================================================================                                                   Ajouter une nouvelle tache\n=======================================================================================");
           printf("\nentrer code id de tache:");scanf("%d",&tacheA.codeId);
+           while(fonction_de_vExisstence(tacheA.codeId)!=0){
+            printf("\ncode id de tache  il ai exist entre autre code id:");scanf("%d",&tacheA.codeId);
+           }
           printf("entrer le titre de tache:");scanf(" %[^\n]", &tacheA.titre);
           printf("entrer le description de tache:");scanf(" %[^\n]", &tacheA.description);
           printf("entrer deadline de tache  ce formme => jj/hh/mm :");scanf("%d/%d/%d",&tacheA.date.jour,&tacheA.date.heurs,&tacheA.date.minute);
@@ -93,6 +112,9 @@ Ajouter_plusieurs_taches(){
         for (int i=1;i<=m;i++){
 
              printf("\nentrer code id de tache %d:",i);scanf("%d",&tacheA.codeId);
+              while(fonction_de_vExisstence(tacheA.codeId)!=0){
+            printf("\ncode id de tache %d il ai exist entre autre code id:",i);scanf("%d",&tacheA.codeId);
+           }
           printf("entrer le titre de tache %d:",i);scanf(" %[^\n]", tacheA.titre);
           printf("entrer le description de tache %d:",i);scanf(" %[^\n]", tacheA.description);
           printf("entrer deadline de tache %d ce formme => jj/hh/mm :",i);scanf("%d/%d/%d",&tacheA.date.jour,&tacheA.date.heurs,&tacheA.date.minute);
@@ -273,8 +295,6 @@ Statistiques(){
 
 
 
-
-
 void trier_alpha(){
     system("cls");
      FILE *file = fopen("taches.txt", "r");
@@ -432,3 +452,5 @@ int main()
     menuPrincipal();
     return 0;
 }
+
+

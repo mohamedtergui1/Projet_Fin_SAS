@@ -86,7 +86,7 @@ Ajouter_une_tache(){
      int day = timeInfo->tm_mday;
     int hour = timeInfo->tm_hour;
     int minute = timeInfo->tm_min;
-          printf("\n=======================================================================================                                                   Ajouter une nouvelle tache\n=======================================================================================");
+          printf("\n==================================================================================================================                                                   Ajouter une nouvelle tache\n==================================================================================================================");
           printf("\nentrer code id de tache:");scanf("%d",&tacheA.codeId);
            while(fonction_de_vExisstence(tacheA.codeId)!=0){
             printf("\ncode id de tache  il ai exist entre autre code id:");scanf("%d",&tacheA.codeId);
@@ -121,7 +121,7 @@ Ajouter_plusieurs_taches(){
     fclose(file);
 }
       fflush(file);
-                  printf("\n=======================================================================================                                                   Ajouter plusieurs nouvelles  tache\n=======================================================================================");
+                  printf("\n===============================================================================================================                                                   Ajouter plusieurs nouvelles  tache\n===============================================================================================================");
           int m;
         printf("\nentree le nombre de taches tu veux te ajoutee:");scanf("%d",&m);
      time(&currentTime);
@@ -170,7 +170,7 @@ Afficher_les_tache(){
     fclose(file);
 }
   rewind(file);
-    printf("\n=======================================================================================\n                                                   Afficher les tache\n=======================================================================================\n");
+    printf("\n=======================================================================================================================\n                                                   Afficher les tache\n=======================================================================================================================\n");
     printf("\n_______________________________________________________________________________________________________________________\n");
     printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
     printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
@@ -182,9 +182,9 @@ Afficher_les_tache(){
 
     fclose(file);
         int o;
-        printf("\n1-Trier les tâches par ordre alphabetique");
-        printf("\n2-Trier les tâches par deadline");
-        printf("\n3-Afficher les tâches dont le deadline est dans 3 jours ou moins");
+        printf("\n1-Trier les taches par ordre alphabetique");
+        printf("\n2-Trier les taches par deadline");
+        printf("\n3-Afficher les taches dont le deadline est dans 3 jours ou moins");
         printf("\n4-aller au menu principal");
         printf("\nentree votre choi :");scanf("%d",&o);
         if(o==1)trier_alpha();
@@ -205,7 +205,7 @@ Modifier_une_tache(){
      rewind(file);
 
       int n;
-           printf("=======================================================================================                                                   Modifier une tache:\n=======================================================================================\n");
+           printf("==================================================================================================================                                                   Modifier une tache:\n==================================================================================================================\n");
            printf("\nentree le code de tache tu veux te modifie:");scanf("%d",&n);
         while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
                 if (tacheA.codeId==n){
@@ -287,7 +287,7 @@ int p =strlen(tmp);
 
    if( atoi(tmp)!=NULL&&p<4){
 
-    printf("\n=======================================================================================\n                                                   Afficher Rechercher Taches <<%s>>\n=======================================================================================\n",tmp);
+    printf("\n========================================================================================================================\n                                                Afficher Rechercher Taches <<%s>>\n========================================================================================================================\n",tmp);
     printf("\n_______________________________________________________________________________________________________________________\n");
     printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
     printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
@@ -370,7 +370,7 @@ nomber_des_taches_incompletes(){
 }
   rewind(file);
   int x=0,y=0;
-    printf("\n=======================================================================================\n                                                   Afficher les tache non complet\n=======================================================================================\n");
+    printf("\n============================================================================================================\n                                                   Afficher les tache non complet\n============================================================================================================\n");
     printf("\n_______________________________________________________________________________________________________________________\n");
     printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
     printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
@@ -401,7 +401,7 @@ nomber_de_jeur_restants(){
     fclose(file);
 }
   rewind(file);
-    printf("\n=======================================================================================\n                                                   Afficher les tache par le nomber de jeur restants\n=======================================================================================\n");
+    printf("\n=========================================================================================================================\n                                                   Afficher les tache par le nomber de jeur restants\n=======================================================================================================================\n");
     printf("\n_______________________________________________________________________________________________________________________\n");
     printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
     printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
@@ -456,9 +456,9 @@ void trier_alpha(){
     free(tacheA);
    fclose(file);
        int o;
-        printf("\n1-Trier les tâches par ordre alphabetique");
-        printf("\n2-Trier les tâches par deadline");
-        printf("\n3-Afficher les tâches dont le deadline est dans 3 jours ou moins");
+        printf("\n1-Trier les taches par ordre alphabetique");
+        printf("\n2-Trier les taches par deadline");
+        printf("\n3-Afficher les taches dont le deadline est dans 3 jours ou moins");
         printf("\n4-aller au menu principal");
         printf("\n=>entree votre choi :");scanf("%d",&o);
         if(o==1)trier_alpha();
@@ -519,9 +519,9 @@ trier_deadline(){
     free(tacheA);
    fclose(file);
        int o;
-        printf("\n1-Trier les tâches par ordre alphabetique");
-        printf("\n2-Trier les tâches par deadline");
-        printf("\n3-Afficher les tâches dont le deadline est dans 3 jours ou moins");
+        printf("\n1-Trier les taches par ordre alphabetique");
+        printf("\n2-Trier les taches par deadline");
+        printf("\n3-Afficher les taches dont le deadline est dans 3 jours ou moins");
         printf("\n4-aller au menu principal");
         printf("\n=>nentree votre choi :");scanf("%d",&o);
         if(o==1)trier_alpha();
@@ -547,7 +547,7 @@ SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
             else printf(" ");
              if(j%2==0)SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
             else SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
-            for(double s ;s<999999999;s++){}
+            for(double s ;s<999999;s++){}
         }
         Sleep(5);
         printf("\n");
@@ -556,8 +556,8 @@ SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
        printf("*******************        ");
        SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
        printf("#gestion des taches#");
-       SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
-         printf("     ******************\n");
+       SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+         printf("    *******************\n");
     for(int i=4;i>=-1;i--){
    printf("                             ");
 
@@ -567,7 +567,8 @@ SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
             else printf(" ");
             if(j%2==0)SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
             else SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
-            for(double s ;s<999999999;s++){}
+            for(double s ;s<999999;s++){}
+
         }
         Sleep(5);
         printf("\n");
@@ -578,6 +579,7 @@ SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
     }
 jour_deadline_3jour(){
     system("cls");
+
           FILE *file = fopen("taches.txt", "r");
            Taches tacheA;
            if (file == NULL) {
@@ -609,7 +611,6 @@ jour_deadline_3jour(){
         if(o==4)menuPrincipal();
         else return ;
 }
-
 int main()
 {
     DZN();

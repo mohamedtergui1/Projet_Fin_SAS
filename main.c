@@ -5,7 +5,9 @@
 #define d "finalisee"
 #define td "realiser"
 #define doo "a realiser"
-
+#include<time.h>
+time_t currentTime;
+    struct tm *timeInfo;
 typedef struct{
       int jour;
       int heurs;
@@ -32,7 +34,7 @@ rewind(file);
              x++;
      }
      fclose(file);
-    return(x=0) ? 0:1;
+    return x;
 }
 void menuPrincipal(){
     system("cls");
@@ -74,6 +76,11 @@ Ajouter_une_tache(){
     printf( "\nil ya une erreur !");
     fclose(file);
 }
+     time(&currentTime);
+    timeInfo = localtime(&currentTime);
+     int day = timeInfo->tm_mday;
+    int hour = timeInfo->tm_hour;
+    int minute = timeInfo->tm_min;
           printf("\n=======================================================================================                                                   Ajouter une nouvelle tache\n=======================================================================================");
           printf("\nentrer code id de tache:");scanf("%d",&tacheA.codeId);
            while(fonction_de_vExisstence(tacheA.codeId)!=0){
@@ -91,7 +98,7 @@ Ajouter_une_tache(){
              case 3 :strcpy(tacheA.statut,doo);break;
           }
             fflush(file);
-          fprintf(file, "%d\n%s\n%s\n%d\n%d\n%d\n%s\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
+          fprintf(file, "%d\n%s\n%s\n%d\n%d\n%d\n%s\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour+day, tacheA.date.heurs+hour, tacheA.date.minute+minute, tacheA.statut);
           fclose(file);
           int o;
         printf("\n1-go to menu principal:");scanf("%d",&o);
@@ -108,7 +115,11 @@ Ajouter_plusieurs_taches(){
                   printf("\n=======================================================================================                                                   Ajouter plusieurs nouvelles  tache\n=======================================================================================");
           int m;
         printf("\nentree le nombre de taches tu veux te ajoutee:");scanf("%d",&m);
-
+     time(&currentTime);
+    timeInfo = localtime(&currentTime);
+     int day = timeInfo->tm_mday;
+    int hour = timeInfo->tm_hour;
+    int minute = timeInfo->tm_min;
         for (int i=1;i<=m;i++){
 
              printf("\nentrer code id de tache %d:",i);scanf("%d",&tacheA.codeId);
@@ -127,7 +138,7 @@ Ajouter_plusieurs_taches(){
              case 3 :strcpy(tacheA.statut,doo);break;
           }
 
-          fprintf(file, "%d\n%s\n%s\n%d\n%d\n%d\n%s\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
+          fprintf(file, "%d\n%s\n%s\n%d\n%d\n%d\n%s\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour+day, tacheA.date.heurs+hour, tacheA.date.minute+minute, tacheA.statut);
 
 
         }
@@ -291,7 +302,7 @@ Statistiques(){
    printf("\n1-Afficher le nombre total des taches");
    printf("\n2-Afficher le nombre de taches completes et incompletes.");
    printf("\n3-Afficher le nombre de jours restants jusqu'au délai de chaque tâche.");
-   printf("\=>aller au menu principal");
+   printf("\n=>aller au menu principal");
    int n;
    printf("\n4-entrer votre choi:");scanf("%d",&n);
    switch(n){
@@ -351,7 +362,9 @@ nomber_des_taches_incompletes(){ FILE *file = fopen("taches.txt", "r");
      printf("\nle total taches  complet est; egal = %d",y);
     fclose(file);
     Statistiques();}
-nomber_de_jeur_restants(){}
+nomber_de_jeur_restants(){
+
+}
 
 void trier_alpha(){
     system("cls");

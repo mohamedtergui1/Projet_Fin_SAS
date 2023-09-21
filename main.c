@@ -281,6 +281,8 @@ rewind(file);
 
    printf("\nentree le =>titer de tache  au le =>codeId de tache:"); scanf("%s",tmp);
 
+
+
 int p =strlen(tmp);
 
    if( atoi(tmp)!=NULL&&p<4){
@@ -290,6 +292,7 @@ int p =strlen(tmp);
     printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
     printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
      while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
+
             if(tacheA.codeId==atoi(tmp)){
         printf("|%2d|%-20s|%-71s|%02d-%02d-%02d |%-11s|\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
         printf("|__|____________________|_______________________________________________________________________|_________|___________|\n");
@@ -303,7 +306,7 @@ int p =strlen(tmp);
     printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
      while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
 
-            if(strncmp(tolower(tmp),tolower(tacheA.titre),p)==0){
+            if(strncmp(tmp,tacheA.titre,p)==0){
         printf("|%2d|%-20s|%-71s|%02d-%02d-%02d |%-11s|\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
         printf("|__|____________________|_______________________________________________________________________|_________|___________|\n");
     }
@@ -532,18 +535,21 @@ trier_deadline(){
 
 SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
         printf("      chargement.......\n\n\n\n\n\n");
+        Sleep(550);
 
         SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
         for(int i=-1;i<=4;i++){
    printf("                             ");
         for (int j=35;j >-35;j--){
-           Sleep(1);
+
             if (i<abs(j)/3)printf("*");
 
             else printf(" ");
              if(j%2==0)SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
             else SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
+            for(double s ;s<999999999;s++){}
         }
+        Sleep(5);
         printf("\n");
     }
     printf("                             ");
@@ -556,12 +562,14 @@ SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
    printf("                             ");
 
         for (int j=35;j>-35;j--){
-                Sleep(1);
+
             if (i<abs(j)/3)printf("*");
             else printf(" ");
             if(j%2==0)SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
             else SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
+            for(double s ;s<999999999;s++){}
         }
+        Sleep(5);
         printf("\n");
     }
 

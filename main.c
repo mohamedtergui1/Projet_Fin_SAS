@@ -234,7 +234,7 @@ rewind(file);
 
 int p =strlen(tmp);
 
-   if( atoi(tmp)!=NULL&&p<3){
+   if( atoi(tmp)!=NULL&&p<4){
 
     printf("\n=======================================================================================\n                                                   Afficher les tache\n=======================================================================================\n");
     printf("\n_______________________________________________________________________________________________________________________\n");
@@ -264,7 +264,11 @@ int p =strlen(tmp);
          printf("\n1-go to menu principal:");scanf("%d",&o);
         if(o==1)menuPrincipal();else return 0;
 }
-Statistiques(){}
+Statistiques(){
+
+
+
+}
 
 
 
@@ -289,7 +293,7 @@ void trier_alpha(){
     for(int i=0;i<n-1;i++){
         for(int j=i+1;j<n;j++){
 
-             if (strcmp(tacheA[i].titre,tacheA[j].titre)>0){
+             if (strcmp(tolower(tacheA[i].titre),tolower(tacheA[j].titre))>0){
                                // strcpy(tacheA[j].titre,tacheA[i].titre);
                                 //strcpy(tacheA[i].titre,tmpchar);
                                 tmptache=tacheA[i];

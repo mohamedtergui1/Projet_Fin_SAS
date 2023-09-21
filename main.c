@@ -220,7 +220,50 @@ Supprimer_identifiant(){
         printf("\n1-go to menu principal:");scanf("%d",&o);
         if(o==1)menuPrincipal();else return ;
     }
-Rechercher_Taches(){}
+Rechercher_Taches(){
+          FILE *file = fopen("taches.txt", "r");
+           Taches tacheA;
+           if (file == NULL) {
+    printf(file, "\nil ya une erreur !");
+    fclose(file);
+}
+rewind(file);
+  char *tmp;  tmp=(char*)malloc(50*sizeof(char));
+
+   printf("\nentree le =>titer de tache  au le =>codeId de tache:"); scanf("%s",tmp);
+
+
+
+   if( atoi(tmp)!=NULL){
+
+    printf("\n=======================================================================================\n                                                   Afficher les tache\n=======================================================================================\n");
+    printf("\n_______________________________________________________________________________________________________________________\n");
+    printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
+    printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
+     while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
+            if(tacheA.codeId==atoi(tmp)){
+        printf("|%2d|%-20s|%-71s|%02d-%02d-%02d |%-11s|\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
+        printf("|__|____________________|_______________________________________________________________________|_________|___________|\n");
+     }
+    }
+   }
+     else {
+            printf("\n=======================================================================================\n                                                   Afficher les tache\n=======================================================================================\n");
+    printf("\n_______________________________________________________________________________________________________________________\n");
+    printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
+    printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
+     while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
+            if(strcmp(tmp,tacheA.titre)==0){
+        printf("|%2d|%-20s|%-71s|%02d-%02d-%02d |%-11s|\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
+        printf("|__|____________________|_______________________________________________________________________|_________|___________|\n");
+    }
+    }
+     }
+    fclose(file);
+        int o;
+         printf("\n1-go to menu principal:");scanf("%d",&o);
+        if(o==1)menuPrincipal();else return 0;
+}
 Statistiques(){}
 
 

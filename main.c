@@ -285,7 +285,7 @@ int p =strlen(tmp);
 
    if( atoi(tmp)!=NULL&&p<4){
 
-    printf("\n=======================================================================================\n                                                   Afficher les tache\n=======================================================================================\n");
+    printf("\n=======================================================================================\n                                                   Afficher Rechercher Taches <<%s>>\n=======================================================================================\n",tmp);
     printf("\n_______________________________________________________________________________________________________________________\n");
     printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
     printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
@@ -297,12 +297,13 @@ int p =strlen(tmp);
     }
    }
      else {
-            printf("\n=======================================================================================\n                                                   Afficher les tache\n=======================================================================================\n");
+            printf("\n=======================================================================================\n                                                   Afficher Rechercher Taches <<%s>>\n=======================================================================================\n",tmp);
     printf("\n_______________________________________________________________________________________________________________________\n");
     printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
     printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
      while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
-            if(strncmp(tmp,tacheA.titre,p)==0){
+
+            if(strncmp(tolower(tmp),tolower(tacheA.titre),p)==0){
         printf("|%2d|%-20s|%-71s|%02d-%02d-%02d |%-11s|\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
         printf("|__|____________________|_______________________________________________________________________|_________|___________|\n");
     }
@@ -333,6 +334,7 @@ Statistiques(){
 }
 
 nomber_total_des_taches(){
+    system("cls");
   FILE *file = fopen("taches.txt", "r");
            Taches tacheA;
            if (file == NULL) {
@@ -383,6 +385,7 @@ nomber_des_taches_incompletes(){
     Statistiques();}
 
 nomber_de_jeur_restants(){
+    system("cls");
      time(&currentTime);
     timeInfo = localtime(&currentTime);
      int day= timeInfo->tm_mday;
@@ -462,7 +465,8 @@ void trier_alpha(){
         else return ;
 }
 
-trier_deadline(){    system("cls");
+trier_deadline(){
+     system("cls");
      FILE *file = fopen("taches.txt", "r");
            Taches *tacheA;
            if (file == NULL) {
@@ -498,12 +502,9 @@ trier_deadline(){    system("cls");
                     }
               }
               }
-
             }
     }
-
-
-     printf("\n=======================================================================================\n                                                   Afficher les tache\n=======================================================================================\n");
+     printf("\n=======================================================================================\n                                                   Trier les taches par deadline\n=======================================================================================\n");
     printf("\n_______________________________________________________________________________________________________________________\n");
     printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
     printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
@@ -518,16 +519,57 @@ trier_deadline(){    system("cls");
         printf("\n1-Trier les tâches par ordre alphabetique");
         printf("\n2-Trier les tâches par deadline");
         printf("\n3-Afficher les tâches dont le deadline est dans 3 jours ou moins");
-        printf("\4-naller au menu principal");
-        printf("\=>nentree votre choi :");scanf("%d",&o);
+        printf("\n4-aller au menu principal");
+        printf("\n=>nentree votre choi :");scanf("%d",&o);
         if(o==1)trier_alpha();
         if(o==2)trier_deadline();
         if(o==3)jour_deadline_3jour();
         if(o==4)menuPrincipal();
         else return ;
         }
+    DZN(){
+  HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
+SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+        printf("      chargement.......\n\n\n\n\n\n");
+
+        SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+        for(int i=-1;i<=4;i++){
+   printf("                             ");
+        for (int j=35;j >-35;j--){
+           Sleep(1);
+            if (i<abs(j)/3)printf("*");
+
+            else printf(" ");
+             if(j%2==0)SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+            else SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
+        }
+        printf("\n");
+    }
+    printf("                             ");
+       printf("*******************        ");
+       SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
+       printf("#gestion des taches#");
+       SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
+         printf("     ******************\n");
+    for(int i=4;i>=-1;i--){
+   printf("                             ");
+
+        for (int j=35;j>-35;j--){
+                Sleep(1);
+            if (i<abs(j)/3)printf("*");
+            else printf(" ");
+            if(j%2==0)SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+            else SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
+        }
+        printf("\n");
+    }
+
+    SetConsoleTextAttribute(hConsole, FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE);
+
+    }
 jour_deadline_3jour(){
+    system("cls");
           FILE *file = fopen("taches.txt", "r");
            Taches tacheA;
            if (file == NULL) {
@@ -535,7 +577,7 @@ jour_deadline_3jour(){
     fclose(file);
 }
   rewind(file);
-    printf("\n=======================================================================================\n                                                   Afficher les tache de deadline inférieur 3 jour\n=======================================================================================\n");
+    printf("\n=======================================================================================\n                                                   Afficher les tache de deadline inferieur 3 jour\n=======================================================================================\n");
     printf("\n_______________________________________________________________________________________________________________________\n");
     printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
     printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
@@ -548,9 +590,9 @@ jour_deadline_3jour(){
 
     fclose(file);
         int o;
-        printf("\n1-Trier les tâches par ordre alphabetique");
-        printf("\n2-Trier les tâches par deadline");
-        printf("\n3-Afficher les tâches dont le deadline est dans 3 jours ou moins");
+        printf("\n1-Trier les taches par ordre alphabetique");
+        printf("\n2-Trier les taches par deadline");
+        printf("\n3-Afficher les taches dont le deadline est dans 3 jours ou moins");
         printf("\n4-aller au menu principal");
         printf("\n=>entree votre choi :");scanf("%d",&o);
         if(o==1)trier_alpha();
@@ -562,6 +604,8 @@ jour_deadline_3jour(){
 
 int main()
 {
+    DZN();
+    Sleep(1200);
     menuPrincipal();
     return 0;
 }

@@ -89,6 +89,9 @@ Ajouter_une_tache(){
           printf("entrer le titre de tache:");scanf(" %[^\n]", &tacheA.titre);
           printf("entrer le description de tache:");scanf(" %[^\n]", &tacheA.description);
           printf("entrer deadline de tache  ce formme => jj/hh/mm :");scanf("%d/%d/%d",&tacheA.date.jour,&tacheA.date.heurs,&tacheA.date.minute);
+          while(tacheA.date.jour<0||tacheA.date.heurs<0||tacheA.date.minute<0){
+             printf("entrer time positive de tache  ce formme => jj/hh/mm :");scanf("%d/%d/%d",&tacheA.date.jour,&tacheA.date.heurs,&tacheA.date.minute);
+          }
           int m;
           printf("1=>realiser\n2=>a realiser\n3=>finalisee");
           printf("\nchoisir une statue:");scanf("%d",&m);
@@ -129,6 +132,9 @@ Ajouter_plusieurs_taches(){
           printf("entrer le titre de tache %d:",i);scanf(" %[^\n]", tacheA.titre);
           printf("entrer le description de tache %d:",i);scanf(" %[^\n]", tacheA.description);
           printf("entrer deadline de tache %d ce formme => jj/hh/mm :",i);scanf("%d/%d/%d",&tacheA.date.jour,&tacheA.date.heurs,&tacheA.date.minute);
+          while(tacheA.date.jour<0||tacheA.date.heurs<0||tacheA.date.minute<0){
+             printf("entrer time positive de tache %d ce formme => jj/hh/mm :",i);scanf("%d/%d/%d",&tacheA.date.jour,&tacheA.date.heurs,&tacheA.date.minute);
+          }
           int n;
           printf("1=>realiser\n2=>a realiser\n3=>finalisee");
           printf("\nchoisir une statue de tache %d:",i);scanf("%d",&n);
@@ -313,7 +319,6 @@ Statistiques(){
       default : printf("tu ai entrer yne movie choi!!");
    }
 
-
 }
 nomber_total_des_taches(){
   FILE *file = fopen("taches.txt", "r");
@@ -363,7 +368,30 @@ nomber_des_taches_incompletes(){ FILE *file = fopen("taches.txt", "r");
     fclose(file);
     Statistiques();}
 nomber_de_jeur_restants(){
+     time(&currentTime);
+    timeInfo = localtime(&currentTime);
+     int day= timeInfo->tm_mday;
+    int hour = timeInfo->tm_hour;
+    int minute = timeInfo->tm_min;
+     FILE *file = fopen("taches.txt", "r");
+           Taches tacheA;
+           if (file == NULL) {
+    printf(file, "\nil ya une erreur !");
+    fclose(file);
+}
+  rewind(file);
+    printf("\n=======================================================================================\n                                                   Afficher les tache\n=======================================================================================\n");
+    printf("\n_______________________________________________________________________________________________________________________\n");
+    printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
+    printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
+     while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
+        printf("|%2d|%-20s|%-71s|%02d-%02d-%02d |%-11s|\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour-day, tacheA.date.heurs-hour, tacheA.date.minute-minute, tacheA.statut);
+        printf("|__|____________________|_______________________________________________________________________|_________|___________|\n");
 
+    }
+
+    fclose(file);
+    Statistiques();
 }
 
 void trier_alpha(){

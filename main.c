@@ -287,13 +287,71 @@ int p =strlen(tmp);
         if(o==1)menuPrincipal();else return 0;
 }
 Statistiques(){
-
+  printf("\n=======================================================================================                                                   Statistiques\n=======================================================================================");
+   printf("\n1-Afficher le nombre total des taches");
+   printf("\n2-Afficher le nombre de taches completes et incompletes.");
+   printf("\n3-Afficher le nombre de jours restants jusqu'au délai de chaque tâche.");
+   printf("\=>aller au menu principal");
+   int n;
+   printf("\n4-entrer votre choi:");scanf("%d",&n);
+   switch(n){
+      case 1: nomber_total_des_taches();break;
+      case 2: nomber_des_taches_incompletes();break;
+      case 3: nomber_de_jeur_restants();break;
+      case 4: menuPrincipal();break;
+      default : printf("tu ai entrer yne movie choi!!");
+   }
 
 
 }
+nomber_total_des_taches(){
+  FILE *file = fopen("taches.txt", "r");
+           Taches tacheA;
+           if (file == NULL) {
+    printf(file, "\nil ya une erreur !");
+    fclose(file);
+}
+  rewind(file);
+  int x=0;
+    printf("\n=======================================================================================\n                                                   Afficher les tache\n=======================================================================================\n");
+    printf("\n_______________________________________________________________________________________________________________________\n");
+    printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
+    printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
+     while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
 
-
-
+        printf("|%2d|%-20s|%-71s|%02d-%02d-%02d |%-11s|\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
+        printf("|__|____________________|_______________________________________________________________________|_________|___________|\n");
+      x++;
+    }
+     printf("\nle total taches egal = %d",x);
+    fclose(file);
+    Statistiques();
+    }
+nomber_des_taches_incompletes(){ FILE *file = fopen("taches.txt", "r");
+           Taches tacheA;
+           if (file == NULL) {
+    printf(file, "\nil ya une erreur !");
+    fclose(file);
+}
+  rewind(file);
+  int x=0,y=0;
+    printf("\n=======================================================================================\n                                                   Afficher les tache non complet\n=======================================================================================\n");
+    printf("\n_______________________________________________________________________________________________________________________\n");
+    printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
+    printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
+     while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
+     if(strcmp(tacheA.statut,td)==0||strcmp(tacheA.statut,doo)==0){
+        printf("|%2d|%-20s|%-71s|%02d-%02d-%02d |%-11s|\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
+        printf("|__|____________________|_______________________________________________________________________|_________|___________|\n");
+      x++;
+     }
+     else y++;
+    }
+     printf("\nle total taches non complet est; egal = %d",x);
+     printf("\nle total taches  complet est; egal = %d",y);
+    fclose(file);
+    Statistiques();}
+nomber_de_jeur_restants(){}
 
 void trier_alpha(){
     system("cls");

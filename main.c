@@ -214,9 +214,8 @@ Modifier_une_tache(){
     fclose(file);
 }
      rewind(file);
-
       int n;
-           printf("==================================================================================================================                                                   Modifier une tache:\n==================================================================================================================\n");
+           printf("=======================================================================================                                                   Modifier une tache:\n=======================================================================================\n");
            printf("\nentree le code de tache tu veux te modifie:");scanf("%d",&n);
         while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
                 if (tacheA.codeId==n){
@@ -232,15 +231,12 @@ Modifier_une_tache(){
              case 3 :strcpy(tacheA.statut,doo);break;
           }
                 }
-          fprintf(file, "%d\n%s\n%s\n%d\n%d\n%d\n%s\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour+day+(tacheA.date.heurs+hour+(tacheA.date.minute+minute)/60)/24, (tacheA.date.heurs+hour+(tacheA.date.minute+minute)/60)%24, (tacheA.date.minute+minute)%60, tacheA.statut);
-
+           fprintf(temp, "%d\n%s\n%s\n%d\n%d\n%d\n%s\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
         }
         fclose(file);
         fclose(temp);
         remove("taches.txt");
         rename("temp.txt","taches.txt");
-
-
           int o;
         printf("\n1-go to menu principal:");scanf("%d",&o);
         if(o==1)menuPrincipal();else return 0;

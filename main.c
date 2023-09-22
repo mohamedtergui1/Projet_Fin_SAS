@@ -230,8 +230,13 @@ Modifier_une_tache(){
              case 2 :strcpy(tacheA.statut,d);break;
              case 3 :strcpy(tacheA.statut,doo);break;
           }
+
+                        fprintf(temp, "%d\n%s\n%s\n%d\n%d\n%d\n%s\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour+day+(tacheA.date.heurs+hour+(tacheA.date.minute+minute)/60)/24, (tacheA.date.heurs+hour+(tacheA.date.minute+minute)/60)%24, (tacheA.date.minute+minute)%60, tacheA.statut);
+
                 }
+                else{
            fprintf(temp, "%d\n%s\n%s\n%d\n%d\n%d\n%s\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
+                }
         }
         fclose(file);
         fclose(temp);

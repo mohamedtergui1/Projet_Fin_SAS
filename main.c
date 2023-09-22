@@ -9,6 +9,7 @@
 #include<conio.h>
     time_t currentTime;
     struct tm *timeInfo;
+
 typedef struct{
       int jour;
       int heurs;
@@ -22,6 +23,15 @@ typedef struct{
      char description[1000];
      char statut[13];
 }Taches;
+
+void lawer(char *s)
+{
+    int i = 0;
+    while(s[i]){
+        if(s[i] >= 'A' && s[i ]<='Z')   s[i] = s[i]+32;
+        i++;
+    }
+}
 
 int fonction_de_vExisstence(int id){
     FILE *file = fopen("taches.txt", "r");
@@ -290,6 +300,8 @@ Rechercher_Taches(){
 }
 rewind(file);
   char *tmp;  tmp=(char*)malloc(50*sizeof(char));
+  char *tmp1;  tmp1=(char*)malloc(50*sizeof(char));
+
 
    printf("\nentree le =>titer de tache  au le =>codeId de tache:"); scanf("%s",tmp);
 
@@ -317,8 +329,9 @@ int p =strlen(tmp);
     printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
     printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
      while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
-
-            if(strncmp(tmp,tacheA.titre,p)==0){
+                strcpy(tmp1,tacheA.titre);
+                lawer(tmp1);lawer(tmp);
+            if(strncmp(tmp,tmp1,p)==0){
         printf("|%2d|%-20s|%-71s|%02d-%02d-%02d |%-11s|\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
         printf("|__|____________________|_______________________________________________________________________|_________|___________|\n");
     }
@@ -444,6 +457,8 @@ void trier_alpha(){
   rewind(file);
          tacheA=(Taches*)malloc(100*sizeof(Taches));
          Taches tmptache;
+         char *tmp1;tmp1=(char*)malloc(50*sizeof(char));
+         char *tmp2;tmp2=(char*)malloc(50*sizeof(char));
           int n =0;
        while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA[n].codeId, tacheA[n].titre, tacheA[n].description, &tacheA[n].date.jour, &tacheA[n].date.heurs, &tacheA[n].date.minute, tacheA[n].statut) == 7) {
           n++;
@@ -451,13 +466,24 @@ void trier_alpha(){
     for(int i=0;i<n-1;i++){
         for(int j=i+1;j<n;j++){
 
-             if (strcmp(tolower(tacheA[i].titre),tolower(tacheA[j].titre))>0){
+                strcpy(tmp1,tacheA[i].titre);
+                strcpy(tmp2,tacheA[j].titre);
+                lawer(tmp1);lawer(tmp2);
+
+             if (strcmp(tmp1,tmp2)>0){
                                // strcpy(tacheA[j].titre,tacheA[i].titre);
                                 //strcpy(tacheA[i].titre,tmpchar);
                                 tmptache=tacheA[i];
                                 tacheA[i]=tacheA[j];
                                 tacheA[j]=tmptache;
                              }
+             else if (strcmp(tmp1,tmp2)==0){
+                     if (strcmp(tacheA[i].titre,tacheA[j].titre)>0){
+                          tmptache=tacheA[i];
+                                tacheA[i]=tacheA[j];
+                                tacheA[j]=tmptache;
+                     }
+             }
         }
     }
 

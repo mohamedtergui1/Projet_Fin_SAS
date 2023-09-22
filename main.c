@@ -504,19 +504,19 @@ trier_deadline(){
     for(int i=0;i<n-1;i++){
         for(int j=i+1;j<n;j++){
 
-             if (tacheA[n].date.jour<tacheA[j].date.jour){
+             if (tacheA[i].date.jour<tacheA[j].date.jour){
                                 tmptache=tacheA[i];
                                 tacheA[i]=tacheA[j];
                                 tacheA[j]=tmptache;
                              }
-              else if (tacheA[n].date.jour==tacheA[j].date.jour){
-                    if (tacheA[n].date.heurs<tacheA[j].date.heurs){
+             else if (tacheA[i].date.jour==tacheA[j].date.jour){
+                    if (tacheA[i].date.heurs<tacheA[j].date.heurs){
                                 tmptache=tacheA[i];
                                 tacheA[i]=tacheA[j];
                                 tacheA[j]=tmptache;
                     }
-                    else if (tacheA[n].date.heurs==tacheA[j].date.heurs){
-                    if (tacheA[n].date.minute<tacheA[j].date.minute){
+                    else if (tacheA[i].date.heurs==tacheA[j].date.heurs){
+                    if (tacheA[i].date.minute<tacheA[j].date.minute){
                                 tmptache=tacheA[i];
                                 tacheA[i]=tacheA[j];
                                 tacheA[j]=tmptache;
@@ -565,7 +565,7 @@ SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
             else printf(" ");
              if(j%2==0)SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
             else SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
-            for(double s ;s<999999;s++){}
+
         }
 
         printf("\n");
@@ -585,7 +585,7 @@ SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
             else printf(" ");
             if(j%2==0)SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
             else SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
-            for(double s ;s<999999;s++){}
+
 
         }
         Sleep(5);

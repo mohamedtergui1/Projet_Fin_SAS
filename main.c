@@ -201,6 +201,11 @@ Afficher_les_tache(){
 }
 
 Modifier_une_tache(){
+    time(&currentTime);
+    timeInfo = localtime(&currentTime);
+     int day= timeInfo->tm_mday;
+    int hour = timeInfo->tm_hour;
+     int minute = timeInfo->tm_min;
    FILE *file = fopen("taches.txt", "r");
    FILE *temp = fopen("temp.txt", "w");
            Taches tacheA;
@@ -227,7 +232,7 @@ Modifier_une_tache(){
              case 3 :strcpy(tacheA.statut,doo);break;
           }
                 }
-           fprintf(temp, "%d\n%s\n%s\n%d\n%d\n%d\n%s\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
+          fprintf(file, "%d\n%s\n%s\n%d\n%d\n%d\n%s\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour+day+(tacheA.date.heurs+hour+(tacheA.date.minute+minute)/60)/24, (tacheA.date.heurs+hour+(tacheA.date.minute+minute)/60)%24, (tacheA.date.minute+minute)%60, tacheA.statut);
 
         }
         fclose(file);
@@ -399,23 +404,24 @@ nomber_de_jeur_restants(){
     timeInfo = localtime(&currentTime);
      int day= timeInfo->tm_mday;
     int hour = timeInfo->tm_hour;
-    int minute = timeInfo->tm_min;
-     FILE *file = fopen("taches.txt", "r");
+     int minute = timeInfo->tm_min;
+            FILE *file = fopen("taches.txt", "r");
            Taches tacheA;
            if (file == NULL) {
     printf(file, "\nil ya une erreur !");
     fclose(file);
 }
   rewind(file);
-    printf("\n=========================================================================================================================\n                                                   Afficher les tache par le nomber de jeur restants\n=======================================================================================================================\n");
+    printf("\n=======================================================================================================================\n                                                   Afficher les tache\n=======================================================================================================================\n");
     printf("\n_______________________________________________________________________________________________________________________\n");
     printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
     printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
      while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
-        printf("|%2d|%-20s|%-71s|%02d/%02d/%02d |%-11s|\n", tacheA.codeId, tacheA.titre, tacheA.description,tacheA.description,abs(tacheA.date.jour-day), abs(tacheA.date.heurs-hour), abs(tacheA.date.minute-minute), tacheA.statut);
+        printf("|%2d|%-20s|%-71s|%02d-%02d-%02d |%-11s|\n", tacheA.codeId, tacheA.titre, tacheA.description,abs(tacheA.date.jour-day), abs(tacheA.date.heurs-hour), abs(tacheA.date.minute-minute), tacheA.statut);
         printf("|__|____________________|_______________________________________________________________________|_________|___________|\n");
 
     }
+
 
     fclose(file);
     Statistiques();
@@ -423,6 +429,11 @@ nomber_de_jeur_restants(){
 
 void trier_alpha(){
     system("cls");
+    time(&currentTime);
+    timeInfo = localtime(&currentTime);
+     int day= timeInfo->tm_mday;
+    int hour = timeInfo->tm_hour;
+     int minute = timeInfo->tm_min;
      FILE *file = fopen("taches.txt", "r");
            Taches *tacheA;
            if (file == NULL) {

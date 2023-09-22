@@ -107,7 +107,7 @@ Ajouter_une_tache(){
              case 3 :strcpy(tacheA.statut,doo);break;
           }
             fflush(file);
-          fprintf(file, "%d\n%s\n%s\n%d\n%d\n%d\n%s\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour+day, tacheA.date.heurs+hour, tacheA.date.minute+minute, tacheA.statut);
+          fprintf(file, "%d\n%s\n%s\n%d\n%d\n%d\n%s\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour+day+(tacheA.date.heurs+hour+(tacheA.date.minute+minute)/60)/24, (tacheA.date.heurs+hour+(tacheA.date.minute+minute)/60)%24, (tacheA.date.minute+minute)%60, tacheA.statut);
           fclose(file);
           int o;
         printf("\n1-go to menu principal:");scanf("%d",&o);
@@ -151,7 +151,7 @@ Ajouter_plusieurs_taches(){
              case 3 :strcpy(tacheA.statut,doo);break;
           }
 
-          fprintf(file, "%d\n%s\n%s\n%d\n%d\n%d\n%s\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour+day, tacheA.date.heurs+hour, tacheA.date.minute+minute, tacheA.statut);
+          fprintf(file, "%d\n%s\n%s\n%d\n%d\n%d\n%s\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour+day+(tacheA.date.heurs+hour+(tacheA.date.minute+minute)/60)/24, (tacheA.date.heurs+hour+(tacheA.date.minute+minute)/60)%24, (tacheA.date.minute+minute)%60, tacheA.statut);
 
 
         }
@@ -164,6 +164,11 @@ Ajouter_plusieurs_taches(){
 }
 
 Afficher_les_tache(){
+     time(&currentTime);
+    timeInfo = localtime(&currentTime);
+     int day= timeInfo->tm_mday;
+    int hour = timeInfo->tm_hour;
+     int minute = timeInfo->tm_min;
             FILE *file = fopen("taches.txt", "r");
            Taches tacheA;
            if (file == NULL) {
@@ -176,7 +181,7 @@ Afficher_les_tache(){
     printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
     printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
      while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
-        printf("|%2d|%-20s|%-71s|%02d-%02d-%02d |%-11s|\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
+        printf("|%2d|%-20s|%-71s|%02d-%02d-%02d |%-11s|\n", tacheA.codeId, tacheA.titre, tacheA.description,abs(tacheA.date.jour-day), abs(tacheA.date.heurs-hour), abs(tacheA.date.minute-minute), tacheA.statut);
         printf("|__|____________________|_______________________________________________________________________|_________|___________|\n");
 
     }
@@ -407,7 +412,7 @@ nomber_de_jeur_restants(){
     printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
     printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
      while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
-        printf("|%2d|%-20s|%-71s|%02d/%02d/%02d |%-11s|\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour-day, tacheA.date.heurs-hour, tacheA.date.minute-minute, tacheA.statut);
+        printf("|%2d|%-20s|%-71s|%02d/%02d/%02d |%-11s|\n", tacheA.codeId, tacheA.titre, tacheA.description,tacheA.description,abs(tacheA.date.jour-day), abs(tacheA.date.heurs-hour), abs(tacheA.date.minute-minute), tacheA.statut);
         printf("|__|____________________|_______________________________________________________________________|_________|___________|\n");
 
     }
@@ -581,6 +586,9 @@ SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
     }
 jour_deadline_3jour(){
     system("cls");
+    time(&currentTime);
+    timeInfo = localtime(&currentTime);
+     int day= timeInfo->tm_mday;
 
           FILE *file = fopen("taches.txt", "r");
            Taches tacheA;
@@ -589,12 +597,12 @@ jour_deadline_3jour(){
     fclose(file);
 }
   rewind(file);
-    printf("\n=======================================================================================\n                                                   Afficher les tache de deadline inferieur 3 jour\n=======================================================================================\n");
+    printf("\n===================================================================================================================\n                                                   Afficher les tache de deadline inferieur 3 jour\n===================================================================================================================\n");
     printf("\n_______________________________________________________________________________________________________________________\n");
     printf("|ID|           titre    |                   discription                                         |deadline |   status  |");
     printf("\n|__|____________________|_______________________________________________________________________|_________|___________|\n");
      while (fscanf(file, "%d\n%[^\n]\n%[^\n]\n%d\n%d\n%d\n%[^\n]\n", &tacheA.codeId, tacheA.titre, tacheA.description, &tacheA.date.jour, &tacheA.date.heurs, &tacheA.date.minute, tacheA.statut) == 7) {
-        if(tacheA.date.jour<=3){
+        if(tacheA.date.jour-day<=3){
         printf("|%2d|%-20s|%-71s|%02d-%02d-%02d |%-11s|\n", tacheA.codeId, tacheA.titre, tacheA.description, tacheA.date.jour, tacheA.date.heurs, tacheA.date.minute, tacheA.statut);
         printf("|__|____________________|_______________________________________________________________________|_________|___________|\n");
         }

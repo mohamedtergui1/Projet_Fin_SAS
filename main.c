@@ -6,6 +6,7 @@
 #define td "realiser"
 #define doo "a realiser"
 #include<time.h>
+#include<conio.h>
     time_t currentTime;
     struct tm *timeInfo;
 typedef struct{
@@ -535,7 +536,7 @@ trier_deadline(){
 
 SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
         printf("      chargement.......\n\n\n\n\n\n");
-        Sleep(550);
+
 
         SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
         for(int i=-1;i<=4;i++){
@@ -549,7 +550,7 @@ SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
             else SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
             for(double s ;s<999999;s++){}
         }
-        Sleep(5);
+
         printf("\n");
     }
     printf("                             ");
@@ -575,6 +576,7 @@ SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
     }
 
     SetConsoleTextAttribute(hConsole, FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE);
+    printf("\n\n\n\n\n\n            cliquez sur n'importe quelle touche pour passer:");
 
     }
 jour_deadline_3jour(){
@@ -614,7 +616,7 @@ jour_deadline_3jour(){
 int main()
 {
     DZN();
-    Sleep(1200);
+   getch();
     menuPrincipal();
     return 0;
 }

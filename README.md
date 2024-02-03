@@ -1,12 +1,12 @@
 #Projet : Gestion de Tâches ToDo
 Introduction : 
 
-Créez une application console pour gérer une liste de tâches à faire (ToDo list), en permettant l'ajout, la modification, la suppression et l'affichage des tâches.
+ une application console pour gérer une liste de tâches à faire (ToDo list), en permettant l'ajout, la modification, la suppression et l'affichage des tâches.
 
 
 Contexte du projet :
 
-L’application doit avoir un menu qui vous permet de :
+L’application   avoir un menu qui vous permet de :
 
 
 Ajouter une nouvelle tâche : Une tâche est définie par un identifiant unique, un titre, une description, un deadline et son statut (à réaliser”, “en cours de réalisation”,  “finalisée").
@@ -46,7 +46,6 @@ Afficher le nombre de tâches complètes et incomplètes.
 Afficher le nombre de jours restants jusqu'au délai de chaque tâche.
 
 
-Bonus:
 
 
 Mettez en place les fonctionnalités suivantes : 
